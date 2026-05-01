@@ -105,6 +105,10 @@ All commands return JSON.
 - `meetings participants`: includes `join_time`, `leave_time`, `duration`
 - `--page-all`: NDJSON output (one record per line, all pages)
 
+## Real-World Use
+
+A typical pattern: trainers and service providers need proof-of-attendance for their clients. With this skill, an agent can pull the registrant list (including custom registration form fields), cross-reference it with actual participants, and produce a sign-off sheet or completion certificate — all in one prompt. The custom questions support arbitrary fields your registration form collects (department, employee ID, license number, etc.).
+
 ## Terminal Logs & Agent Workflow
 
 ### Registrant query (agent-driven)
