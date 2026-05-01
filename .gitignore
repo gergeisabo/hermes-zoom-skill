@@ -1,0 +1,13 @@
+# Zoom API credentials — never commit these
+*.json
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+
+# OS
+.DS_Store
+Thumbs.db
