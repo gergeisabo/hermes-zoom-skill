@@ -105,6 +105,55 @@ All commands return JSON.
 - `meetings participants`: includes `join_time`, `leave_time`, `duration`
 - `--page-all`: NDJSON output (one record per line, all pages)
 
+## Terminal Logs & Agent Workflow
+
+### Registrant query (agent-driven)
+
+```
+$ hermes "list registrants for today's onboarding meeting"
+
+# → Agent loads zoom skill
+# → skill_view("zoom") → reads SKILL.md
+# → Runs: python3 scripts/zoom_api.py meetings list --type upcoming
+# → Picks meeting ID 89189605850
+# → Runs: python3 scripts/zoom_api.py meetings registrants 89189605850
+```
+
+Output (custom questions include ÜGYNÖKSÉG, TÖRZSSZÁM):
+
+```json
+{
+  "id": 89189605850,
+  "topic": "ONLINE IGÉNYFELKELTÉS 2",
+  "registrants": [
+    {
+      "email": "ugynok@peldahu.hu",
+      "first_name": "András",
+      "last_name": "Kovács",
+      "custom_questions": [
+        {"title": "ÜGYNÖKSÉG", "value": "Alpha Bt."},
+        {"title": "TÖRZSSZÁM", "value": "XY12345"}
+      ]
+    }
+  ]
+}
+```
+
+### Recording download + cloud cleanup (real session, April 25 2026)
+
+```
+$ hermes "download all Zoom recordings to /mnt/storagebox/ZOOM/"
+
+# Agent flow:
+# → zoom_api.py raw "/v2/users/me/recordings"
+# → Found: 3 recordings, 26 files, ~4.3 GB
+# → curl -L -H "Authorization: Bearer {token}" for each download URL
+# → Saved to /mnt/storagebox/ZOOM/
+# → DELETE /v2/meetings/{meetingId}/recordings — all 3 cleared
+```
+
+Downloads completed in ~12 min for 4.3 GB.
+
 ## Contributors
 
 Built with:
