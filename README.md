@@ -115,44 +115,44 @@ $ hermes "list registrants for today's onboarding meeting"
 # → Agent loads zoom skill
 # → skill_view("zoom") → reads SKILL.md
 # → Runs: python3 scripts/zoom_api.py meetings list --type upcoming
-# → Picks meeting ID 89189605850
-# → Runs: python3 scripts/zoom_api.py meetings registrants 89189605850
+# → Picks meeting ID 123456789
+# → Runs: python3 scripts/zoom_api.py meetings registrants 123456789
 ```
 
-Output (custom questions include ÜGYNÖKSÉG, TÖRZSSZÁM):
+Output (custom questions from registration form are included):
 
 ```json
 {
-  "id": 89189605850,
-  "topic": "ONLINE IGÉNYFELKELTÉS 2",
+  "id": "123456789",
+  "topic": "Example Onboarding Session",
   "registrants": [
     {
-      "email": "ugynok@peldahu.hu",
-      "first_name": "András",
-      "last_name": "Kovács",
+      "email": "user@example.com",
+      "first_name": "John",
+      "last_name": "Doe",
       "custom_questions": [
-        {"title": "ÜGYNÖKSÉG", "value": "Alpha Bt."},
-        {"title": "TÖRZSSZÁM", "value": "XY12345"}
+        {"title": "custom_question_1", "value": "value_example"},
+        {"title": "custom_question_2", "value": "value_example"}
       ]
     }
   ]
 }
 ```
 
-### Recording download + cloud cleanup (real session, April 25 2026)
+### Recording download + cloud cleanup
 
 ```
-$ hermes "download all Zoom recordings to /mnt/storagebox/ZOOM/"
+$ hermes "download all Zoom recordings to /path/to/download/dir/"
 
 # Agent flow:
 # → zoom_api.py raw "/v2/users/me/recordings"
-# → Found: 3 recordings, 26 files, ~4.3 GB
+# → Found: N recordings, ~X files, ~Y GB
 # → curl -L -H "Authorization: Bearer {token}" for each download URL
-# → Saved to /mnt/storagebox/ZOOM/
-# → DELETE /v2/meetings/{meetingId}/recordings — all 3 cleared
+# → Saved to /path/to/download/dir/
+# → DELETE /v2/meetings/{meetingId}/recordings — all cleared
 ```
 
-Downloads completed in ~12 min for 4.3 GB.
+Downloads completed in ~N min.
 
 ## Contributors
 
