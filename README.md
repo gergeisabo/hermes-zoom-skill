@@ -105,6 +105,14 @@ All commands return JSON.
 - `meetings participants`: includes `join_time`, `leave_time`, `duration`
 - `--page-all`: NDJSON output (one record per line, all pages)
 
+## Contributors
+
+Built with:
+
+- [Hermes Agent](https://github.com/NousResearch/hermes-agent) — the AI agent framework
+- [DeepSeek](https://deepseek.com) — code review partner
+- [Xiaomi MiMo v2 Pro](https://xiaomimimo.com) (`mimo-v2-pro`) — authored the initial skill
+
 ## License
 
 MIT
