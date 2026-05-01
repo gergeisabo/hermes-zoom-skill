@@ -136,7 +136,14 @@ def cmd_check():
 def cmd_set_credentials(file_path: str = None):
     """Store Zoom credentials."""
     if file_path:
-        data = json.loads(Path(file_path).read_text())
+        cred_file = Path(file_path).resolve()
+        if not cred_file.is_file():
+            print(f"ERROR: {file_path} does not exist or is not a file")
+            sys.exit(1)
+        if cred_file.suffix != ".json":
+            print("ERROR: credentials file must be a .json file")
+            sys.exit(1)
+        data = json.loads(cred_file.read_text())
         account_id = data.get("account_id")
         client_id = data.get("client_id")
         client_secret = data.get("client_secret")
